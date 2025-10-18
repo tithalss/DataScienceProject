@@ -2,7 +2,8 @@ import pandas as pd
 from treatment.load_dataset import load_all_datasets
 from treatment.save_data import save_processed_data
 from treatment.pre_processing import standardize_columns, remove_duplicates, fill_missing, convert_types, merge_datasets
-from analytics.analysis import descriptive_statistics, top_players_by_metric
+from analytics.analysis import top_players_by_metric
+from analytics.kpis import calculate_all_kpis, top_players_by_kpi
 
 datasets = load_all_datasets()
 df1 = datasets['players_dataset_1']
@@ -71,3 +72,11 @@ print(top_scorers)
 
 print("\nTop 10 jogadores por assistências:")
 print(top_assisters)
+
+df = pd.read_csv('processed_data/players_merged.csv')
+
+df = calculate_all_kpis(df)
+save_processed_data(df, 'players_with_kpis.csv')
+
+top_overall = top_players_by_kpi(df, kpi='overall_kpi', top_n=10)
+print(top_overall[['player', 'overall_kpi']])
