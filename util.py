@@ -25,7 +25,9 @@ df1 = convert_types(df1, types1)
 df2 = convert_types(df2, types2)
 
 df_merged = merge_datasets(df1, df2, on_cols=['player'], how='inner')
+
 df_merged = df_merged.drop_duplicates(subset='player', keep='first')
+df_merged = df_merged.loc[:, ~df_merged.columns.duplicated()]
 
 numeric_cols = df_merged.select_dtypes(include='number').columns
 df_merged[numeric_cols] = df_merged[numeric_cols].astype(float)
@@ -35,13 +37,8 @@ df_merged['assists_per_match'] = df_merged['ast'] / df_merged['mp'].replace(0, 1
 
 save_processed_data(df_merged, filename='players_merged.csv')
 
-stats = descriptive_statistics(df_merged)
-print(stats)
-
-print(df_merged.columns.tolist())
-
 columns_of_interest = [
-    'age', 'crossing', 'finishing', 'heading_accuracy', 'short_passing',
+    'age_x', 'crossing', 'finishing', 'heading_accuracy', 'short_passing',
     'volleys', 'dribbling', 'curve', 'fk_accuracy', 'long_passing',
     'ball_control', 'acceleration', 'sprint_speed', 'agility', 'reactions',
     'balance', 'shot_power', 'jumping', 'stamina', 'strength',
@@ -51,19 +48,11 @@ columns_of_interest = [
     'gk_reflexes', 'best_overall_rating', 'mp', 'gls', 'ast', 'goals_per_match',
     'assists_per_match'
 ]
-
 columns_of_interest = [col for col in columns_of_interest if col in df_merged.columns]
-
-df_merged = pd.concat(
-    [df_merged,
-     (df_merged['gls'] / df_merged['mp'].replace(0, 1)).rename('goals_per_match'),
-     (df_merged['ast'] / df_merged['mp'].replace(0, 1)).rename('assists_per_match')],
-    axis=1
-)
 
 df_numeric = df_merged[columns_of_interest]
 
-stats = pd.DataFrame(index=columns_of_interest)
+stats = pd.DataFrame(index=df_numeric.columns)
 stats['mean'] = df_numeric.mean()
 stats['median'] = df_numeric.median()
 stats['mode'] = df_numeric.mode().iloc[0]

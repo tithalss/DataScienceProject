@@ -1,4 +1,3 @@
-import pandas as pd
 import os
 
 def save_processed_data(df, filename='processed_data_players.csv'):
