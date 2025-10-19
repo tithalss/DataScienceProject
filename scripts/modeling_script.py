@@ -23,7 +23,7 @@ def run_modeling():
     linear_model.fit(X_train, y_train)
     y_pred = linear_model.predict(X_test)
 
-    print("📈 [Regressão Linear]")
+    print("[Regressão Linear]")
     print(f"R²: {r2_score(y_test, y_pred):.4f}")
     print(f"MSE: {mean_squared_error(y_test, y_pred):.4f}\n")
 
@@ -40,7 +40,7 @@ def run_modeling():
     logistic_model.fit(X_train, y_train)
     y_pred = logistic_model.predict(X_test)
 
-    print("⚽ [Regressão Logística]")
+    print("[Regressão Logística]")
     print(f"Acurácia: {accuracy_score(y_test, y_pred):.4f}")
     print(classification_report(y_test, y_pred, zero_division=0))
 
@@ -48,14 +48,14 @@ def run_modeling():
     tree_model.fit(X_train, y_train)
     y_pred_tree = tree_model.predict(X_test)
 
-    print("🌳 [Árvore de Decisão]")
+    print("[Árvore de Decisão]")
     print(f"Acurácia: {accuracy_score(y_test, y_pred_tree):.4f}")
 
     knn_model = KNeighborsClassifier(n_neighbors=5)
     knn_model.fit(X_train, y_train)
     y_pred_knn = knn_model.predict(X_test)
 
-    print("🤝 [KNN]")
+    print("[KNN]")
     print(f"Acurácia: {accuracy_score(y_test, y_pred_knn):.4f}")
 
-    print("\n✅ Modelagem preditiva concluída!")
+    print("\nModelagem preditiva concluída!")

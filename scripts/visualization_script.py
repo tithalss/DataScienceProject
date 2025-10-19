@@ -9,11 +9,8 @@ def run_visualization():
     plot_top_players(df, 'overall_kpi', top_n=10)
     plot_distribution(df, 'goals_per_match')
 
-    kpi_cols = [
-        'goals_per_match', 'assists_per_match', 'passes_per_match',
-        'tackles_per_match', 'pass_accuracy', 'speed', 'overall_kpi'
-    ]
+    kpi_cols = ['goals_per_match', 'assists_per_match', 'passes_per_match', 'tackles_per_match', 'pass_accuracy', 'speed', 'overall_kpi']
 
     plot_correlation_matrix(df, kpi_cols)
     dashboard_summary(df)
-    print("📈 Visualizações geradas com sucesso!")
+    print("Visualizações geradas com sucesso!")

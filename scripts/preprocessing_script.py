@@ -1,8 +1,6 @@
 import pandas as pd
 from treatment.load_dataset import load_all_datasets
-from treatment.pre_processing import (
-    standardize_columns, remove_duplicates, fill_missing, convert_types, merge_datasets
-)
+from treatment.pre_processing import (standardize_columns, remove_duplicates, fill_missing, convert_types, merge_datasets)
 from treatment.save_data import save_processed_data
 
 
@@ -42,4 +40,4 @@ def run_preprocessing():
     ], axis=1).copy()
 
     save_processed_data(df_merged, filename='players_merged.csv')
-    print("✅ Pré-processamento concluído! Arquivo salvo em processed_data/players_merged.csv")
+    print("Pré-processamento concluído! Arquivo salvo em processed_data/players_merged.csv")

@@ -24,15 +24,15 @@ def run_analysis():
     top_scorers = top_players_by_metric(df, 'gls', top_n=10)
     top_assisters = top_players_by_metric(df, 'ast', top_n=10)
 
-    print("\n⚽ Top 10 jogadores por gols:")
+    print("\nTop 10 jogadores por gols:")
     print(top_scorers[['player', 'gls']])
 
-    print("\n🎯 Top 10 jogadores por assistências:")
+    print("\nTop 10 jogadores por assistências:")
     print(top_assisters[['player', 'ast']])
 
     df = calculate_all_kpis(df)
     save_processed_data(df, 'players_with_kpis.csv')
 
     top_overall = top_players_by_kpi(df, kpi='overall_kpi', top_n=10)
-    print("\n🏆 Top 10 jogadores por Overall KPI:")
+    print("\nTop 10 jogadores por Overall KPI:")
     print(top_overall[['player', 'overall_kpi']])
