@@ -1,3 +1,5 @@
+mlxtend
+scikit-learn
 plotly
 matplotlib
 seaborn
